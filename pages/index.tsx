@@ -37,7 +37,9 @@ const Home: NextPage = () => {
 
         <IntegrationsList integrations={data} setIntegration={setIntegration} setOpen={setOpen} />
       </main>
-      {open && <Modal data={integration!} setIntegration={setIntegration} setOpen={setOpen} />}
+      {open ? (
+        <Modal data={integration!} setIntegration={setIntegration} setOpen={setOpen} />
+      ) : null}
     </div>
   );
 };

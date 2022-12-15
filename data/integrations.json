@@ -1,65 +1,68 @@
 [
-  {
-    "id": "1",
-    "name": "Salesforce",
-    "url": "https://www.salesforce.com/",
-    "image": "https://cdn-www.infobip.com/wp-content/uploads/2020/10/14141818/salesforce-png.jpg",
-    "description": "Integrate your contacts with Salesforce, the world's #1 CRM.",
-    "fields": [
-      {
+    {
         "id": "1",
-        "name": "Client ID",
-        "type": "text",
-        "required": true
-      },
-      {
+        "name": "Salesforce",
+        "url": "https://www.salesforce.com/",
+        "image": "https://cdn-www.infobip.com/wp-content/uploads/2020/10/14141818/salesforce-png.jpg",
+        "description": "Integrate your contacts with Salesforce, the world's #1 CRM.",
+        "connected": false,
+        "fields": [
+            {
+                "id": "1",
+                "name": "client_id",
+                "type": "text",
+                "required": true
+            },
+            {
+                "id": "2",
+                "name": "client_secret",
+                "type": "text",
+                "required": true
+            }
+        ]
+    },
+    {
         "id": "2",
-        "name": "Client Secret",
-        "type": "text",
-        "required": true
-      }
-    ]
-  },
-  {
-    "id": "2",
-    "name": "Zapier",
-    "url": "https://zapier.com/",
-    "image": "https://zapier.com/static/images/zapier-logo.png",
-    "description": "Integrate your contacts with Zapier, the world's #1 CRM.",
-    "fields": [
-      {
-        "id": "1",
-        "name": "API Key",
-        "type": "text",
-        "required": true
-      }
-    ]
-  },
-  {
-    "id": "3",
-    "name": "HubSpot",
-    "url": "https://www.hubspot.com/",
-    "image": "https://www.hubspot.com/hubfs/HubSpot%20Logo%20White.png",
-    "description": "Integrate your contacts with HubSpot, the world's #1 CRM.",
-    "fields": [
-      {
-        "id": "1",
-        "name": "Tenant Domain",
-        "type": "text",
-        "required": true
-      },
-      {
-        "id": "2",
-        "name": "Client ID",
-        "type": "text",
-        "required": true
-      },
-      {
+        "name": "Zapier",
+        "url": "https://zapier.com/",
+        "image": "https://zapier.com/static/images/zapier-logo.png",
+        "description": "Integrate your contacts with Zapier, the world's #1 CRM.",
+        "connected": false,
+        "fields": [
+            {
+                "id": "1",
+                "name": "api_key",
+                "type": "text",
+                "required": true
+            }
+        ]
+    },
+    {
         "id": "3",
-        "name": "Client Secret",
-        "type": "text",
-        "required": true
-      }
-    ]
-  }
+        "name": "HubSpot",
+        "url": "https://www.hubspot.com/",
+        "image": "https://www.hubspot.com/hubfs/HubSpot%20Logo%20White.png",
+        "description": "Integrate your contacts with HubSpot, the world's #1 CRM.",
+        "connected": false,
+        "fields": [
+            {
+                "id": "1",
+                "name": "tenant_domain",
+                "type": "text",
+                "required": true
+            },
+            {
+                "id": "2",
+                "name": "client_id",
+                "type": "text",
+                "required": true
+            },
+            {
+                "id": "3",
+                "name": "client_secret",
+                "type": "text",
+                "required": true
+            }
+        ]
+    }
 ]

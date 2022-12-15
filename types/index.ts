@@ -5,6 +5,7 @@ export type Integration = {
   image: string;
   description: string;
   fields: any[];
+  connected: boolean;
 };
 
 export type Field = {
@@ -12,4 +13,5 @@ export type Field = {
   name: string;
   type: string;
   required: boolean;
+  value: string;
 };
