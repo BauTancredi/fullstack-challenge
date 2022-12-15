@@ -1,11 +1,18 @@
 import type { NextPage } from "next";
 
+import useSWR from "swr";
 import Head from "next/head";
-import Image from "next/image";
 
+import IntegrationsList from "../components/IntegrationsList";
 import styles from "../styles/Home.module.css";
 
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
 const Home: NextPage = () => {
+  const { data, error } = useSWR("/api/integrations", fetcher);
+
+  if (error) return <div>Failed to load</div>;
+
   return (
     <div className={styles.container}>
       <Head>
@@ -19,7 +26,7 @@ const Home: NextPage = () => {
 
         <p className={styles.description}>Connect your Blinq account to your favourite services</p>
 
-        <div className={styles.grid} />
+        <IntegrationsList integrations={data} />
       </main>
     </div>
   );
