@@ -1,14 +1,21 @@
 import type { NextPage } from "next";
 
+import { useState } from "react";
 import useSWR from "swr";
 import Head from "next/head";
 
 import IntegrationsList from "../components/IntegrationsList";
 import styles from "../styles/Home.module.css";
+import { Integration } from "../types";
+import Modal from "../components/Modal";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const Home: NextPage = () => {
+  // Could use useReducer + useContext here, but useState is fine for now
+  const [open, setOpen] = useState(false);
+  const [integration, setIntegration] = useState<Integration | null>(null);
+
   const { data, error } = useSWR("/api/integrations", fetcher);
 
   if (error) return <div>Failed to load</div>;
@@ -28,8 +35,9 @@ const Home: NextPage = () => {
 
         <p className={styles.description}>Connect your Blinq account to your favourite services</p>
 
-        <IntegrationsList integrations={data} />
+        <IntegrationsList integrations={data} setIntegration={setIntegration} setOpen={setOpen} />
       </main>
+      {open && <Modal data={integration!} setIntegration={setIntegration} setOpen={setOpen} />}
     </div>
   );
 };
