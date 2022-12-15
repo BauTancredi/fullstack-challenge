@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Integration } from "../types";
-import styles from "../styles/Home.module.css";
+import styles from "../styles/List.module.css";
 
 import IntegrationCard from "./IntegrationCard";
 

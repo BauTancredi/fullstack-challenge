@@ -27,7 +27,7 @@
         "url": "https://zapier.com/",
         "image": "https://zapier.com/static/images/zapier-logo.png",
         "description": "Integrate your contacts with Zapier, the world's #1 CRM.",
-        "connected": false,
+        "connected": true,
         "fields": [
             {
                 "id": "1",

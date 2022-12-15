@@ -1,9 +1,8 @@
 import React from "react";
 
-import styles from "../styles/Home.module.css";
+import styles from "../styles/Modal.module.css";
 import { Field, Integration } from "../types";
 import { formatName } from "../utils";
-import integrations from "../data/integrations.json";
 
 interface ModalProps {
   data: Integration;
@@ -39,8 +38,7 @@ export default function Modal({ setOpen, data, setIntegration }: ModalProps) {
 
     setLoading(true);
 
-    if (data.connected) {
-    }
+    const method = data.connected ? "POST" : "DELETE";
 
     try {
       const body = {
@@ -50,7 +48,7 @@ export default function Modal({ setOpen, data, setIntegration }: ModalProps) {
       };
 
       const res = await fetch(`/api/integrations/${data.id}`, {
-        method: "POST",
+        method,
         headers: {
           "Content-Type": "application/json",
         },
@@ -113,7 +111,7 @@ export default function Modal({ setOpen, data, setIntegration }: ModalProps) {
               ))}
             </div>
           ) : null}
-          <button className={styles.button} disabled={data.connected} type="submit">
+          <button className={styles.connectButton} disabled={data.connected} type="submit">
             {loading ? <div className={styles.loader} /> : "Connect"}
           </button>
           {data.connected ? (

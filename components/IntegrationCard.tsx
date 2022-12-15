@@ -1,8 +1,7 @@
 import React from "react";
-import Image from "next/image";
 
 import { Integration } from "../types";
-import styles from "../styles/Home.module.css";
+import styles from "../styles/Card.module.css";
 
 interface IntegrationCardProps {
   integration: Integration;
@@ -22,7 +21,7 @@ export default function IntegrationCard({
 
   return (
     <div className={styles.card} onClick={handleClick}>
-      <h3>{integration.name}</h3>
+      <h2>{integration.name}</h2>
       <p>{integration.description}</p>
     </div>
   );
