@@ -136,3 +136,33 @@
   padding: 10px;
   cursor: pointer;
 }
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  background-color: #0070f3;
+}
+
+.fields {
+  margin: 2rem 0;
+}
+
+.fields>div {
+  margin-bottom: 1rem;
+}
+
+.fieldContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}

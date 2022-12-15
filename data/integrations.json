@@ -5,7 +5,20 @@
     "url": "https://www.salesforce.com/",
     "image": "https://cdn-www.infobip.com/wp-content/uploads/2020/10/14141818/salesforce-png.jpg",
     "description": "Integrate your contacts with Salesforce, the world's #1 CRM.",
-    "fields": []
+    "fields": [
+      {
+        "id": "1",
+        "name": "Client ID",
+        "type": "text",
+        "required": true
+      },
+      {
+        "id": "2",
+        "name": "Client Secret",
+        "type": "text",
+        "required": true
+      }
+    ]
   },
   {
     "id": "2",
@@ -13,7 +26,14 @@
     "url": "https://zapier.com/",
     "image": "https://zapier.com/static/images/zapier-logo.png",
     "description": "Integrate your contacts with Zapier, the world's #1 CRM.",
-    "fields": []
+    "fields": [
+      {
+        "id": "1",
+        "name": "API Key",
+        "type": "text",
+        "required": true
+      }
+    ]
   },
   {
     "id": "3",
@@ -21,6 +41,25 @@
     "url": "https://www.hubspot.com/",
     "image": "https://www.hubspot.com/hubfs/HubSpot%20Logo%20White.png",
     "description": "Integrate your contacts with HubSpot, the world's #1 CRM.",
-    "fields": []
+    "fields": [
+      {
+        "id": "1",
+        "name": "Tenant Domain",
+        "type": "text",
+        "required": true
+      },
+      {
+        "id": "2",
+        "name": "Client ID",
+        "type": "text",
+        "required": true
+      },
+      {
+        "id": "3",
+        "name": "Client Secret",
+        "type": "text",
+        "required": true
+      }
+    ]
   }
 ]

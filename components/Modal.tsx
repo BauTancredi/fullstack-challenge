@@ -1,7 +1,7 @@
 import React from "react";
 
 import styles from "../styles/Home.module.css";
-import { Integration } from "../types";
+import { Field, Integration } from "../types";
 
 interface ModalProps {
   data: Integration;
@@ -23,6 +23,19 @@ export default function Modal({ setOpen, data, setIntegration }: ModalProps) {
         </button>
 
         <h1>{data.name}</h1>
+
+        <p>{data.description}</p>
+
+        <div className={styles.fields}>
+          {data.fields.map((field: Field) => (
+            <div key={field.name} className={styles.fieldContainer}>
+              <label htmlFor={field.name}>{field.name}</label>
+              <input id={field.name} required={field.required} type={field.type} />
+            </div>
+          ))}
+        </div>
+
+        <button className={styles.button}>Connect</button>
       </div>
     </div>
   );

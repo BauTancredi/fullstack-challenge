@@ -6,3 +6,10 @@ export type Integration = {
   description: string;
   fields: any[];
 };
+
+export type Field = {
+  id: string;
+  name: string;
+  type: string;
+  required: boolean;
+};
