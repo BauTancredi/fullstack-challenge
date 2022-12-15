@@ -1,23 +1,26 @@
 [
   {
+    "id": "1",
     "name": "Salesforce",
     "url": "https://www.salesforce.com/",
-    "image": "https://www.salesforce.com/content/dam/web/en_us/www/images/social-share/salesforce-logo.jpg",
-    "description": "Salesforce is the global leader in CRM. We provide the most comprehensive set of cloud-based applications for sales, service, marketing, community, analytics, and app development. Our apps work together on any device and help you connect with customers, partners, and employees in entirely new ways.",
+    "image": "https://cdn-www.infobip.com/wp-content/uploads/2020/10/14141818/salesforce-png.jpg",
+    "description": "Integrate your contacts with Salesforce, the world's #1 CRM.",
     "fields": []
   },
   {
+    "id": "2",
     "name": "Zapier",
     "url": "https://zapier.com/",
     "image": "https://zapier.com/static/images/zapier-logo.png",
-    "description": "Zapier is the easiest way to automate your work. Connect your favorite apps to automate repetitive tasks. Zapier's automation tools make it easy to connect the web apps you use.",
+    "description": "Integrate your contacts with Zapier, the world's #1 CRM.",
     "fields": []
   },
   {
+    "id": "3",
     "name": "HubSpot",
     "url": "https://www.hubspot.com/",
     "image": "https://www.hubspot.com/hubfs/HubSpot%20Logo%20White.png",
-    "description": "HubSpot is a leading growth platform. Since 2006, we've been on a mission to make the world more inbound. Today, over 52,000 total customers in more than 100 countries use our award-winning software, services, and support to transform the way they attract, engage, and delight customers.",
+    "description": "Integrate your contacts with HubSpot, the world's #1 CRM.",
     "fields": []
   }
 ]
