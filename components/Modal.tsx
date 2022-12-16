@@ -1,9 +1,9 @@
 import React from "react";
-import { useSWRConfig } from "swr";
+import useSWR, { useSWRConfig } from "swr";
 
 import styles from "../styles/Modal.module.css";
 import { Field, Integration } from "../database";
-import { formatName } from "../utils";
+import { fetcher, formatName } from "../utils";
 
 interface ModalProps {
   data: Integration;
@@ -14,6 +14,8 @@ interface ModalProps {
 export default function Modal({ setOpen, data, setIntegration }: ModalProps) {
   const [fields, setFields] = React.useState<Field[]>(data.fields);
   const [loading, setLoading] = React.useState(false);
+  const { data: userData } = useSWR("/api/user", fetcher);
+
   const { mutate } = useSWRConfig();
 
   const closeModal = () => {
@@ -40,16 +42,19 @@ export default function Modal({ setOpen, data, setIntegration }: ModalProps) {
 
     setLoading(true);
 
+    const method = data.connected ? "DELETE" : "POST";
+
     try {
       const body = {
         name: data.name,
         id: data.id,
-        fields: fields.map((field) => ({ name: field.name, value: field.value })),
         api: data.api,
+        userId: userData.id,
+        fields: fields.map((field) => ({ name: field.name, value: field.value })),
       };
 
       const res = await fetch(`/api/integrations/${data.id}`, {
-        method: "PUT",
+        method,
         headers: {
           "Content-Type": "application/json",
         },

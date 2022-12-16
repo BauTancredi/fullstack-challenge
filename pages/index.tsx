@@ -8,19 +8,19 @@ import IntegrationsList from "../components/IntegrationsList";
 import styles from "../styles/Home.module.css";
 import { Integration } from "../database";
 import Modal from "../components/Modal";
-
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+import { fetcher } from "../utils";
 
 const Home: NextPage = () => {
   // Could use useReducer + useContext here, but useState is fine for now
   const [open, setOpen] = useState(false);
   const [integration, setIntegration] = useState<Integration | null>(null);
 
-  const { data, error } = useSWR("/api/integrations", fetcher);
+  const { data: integrationsData, error: integrationsError } = useSWR("/api/integrations", fetcher);
+  const { data: userData, error: userError } = useSWR("/api/user", fetcher);
 
-  if (error) return <div>Failed to load</div>;
+  if (integrationsError || userError) return <div>Failed to load</div>;
 
-  if (!data) return <div>Loading...</div>;
+  if (!integrationsData || !userData) return <div>Loading...</div>;
 
   return (
     <div className={styles.container}>
@@ -35,7 +35,11 @@ const Home: NextPage = () => {
 
         <p className={styles.description}>Connect your Blinq account to your favourite services</p>
 
-        <IntegrationsList integrations={data} setIntegration={setIntegration} setOpen={setOpen} />
+        <IntegrationsList
+          integrations={integrationsData}
+          setIntegration={setIntegration}
+          setOpen={setOpen}
+        />
       </main>
       {open ? (
         <Modal data={integration!} setIntegration={setIntegration} setOpen={setOpen} />
@@ -47,5 +51,4 @@ const Home: NextPage = () => {
 export default Home;
 
 // TODO
-// user
 // HubSpot field mappings
