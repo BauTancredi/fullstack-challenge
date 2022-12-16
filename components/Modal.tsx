@@ -1,4 +1,5 @@
 import React from "react";
+import { useSWRConfig } from "swr";
 
 import styles from "../styles/Modal.module.css";
 import { Field, Integration } from "../types";
@@ -13,6 +14,7 @@ interface ModalProps {
 export default function Modal({ setOpen, data, setIntegration }: ModalProps) {
   const [fields, setFields] = React.useState<Field[]>(data.fields);
   const [loading, setLoading] = React.useState(false);
+  const { mutate } = useSWRConfig();
 
   const closeModal = () => {
     setOpen(false);
@@ -38,22 +40,23 @@ export default function Modal({ setOpen, data, setIntegration }: ModalProps) {
 
     setLoading(true);
 
-    const method = data.connected ? "POST" : "DELETE";
-
     try {
       const body = {
         name: data.name,
         id: data.id,
         fields: fields.map((field) => ({ name: field.name, value: field.value })),
+        api: data.api,
       };
 
       const res = await fetch(`/api/integrations/${data.id}`, {
-        method,
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(body),
       });
+
+      mutate("/api/integrations");
 
       if (!res.ok) throw new Error("Something went wrong");
 
@@ -70,15 +73,23 @@ export default function Modal({ setOpen, data, setIntegration }: ModalProps) {
 
     setLoading(true);
 
+    const body = {
+      name: data.name,
+      id: data.id,
+      api: data.api,
+    };
+
     const res = await fetch(`/api/integrations/${data.id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data.id),
+      body: JSON.stringify(body),
     });
 
     if (!res.ok) throw new Error("Something went wrong");
+
+    mutate("/api/integrations");
 
     setFields(data.fields);
     closeModal();
@@ -94,6 +105,7 @@ export default function Modal({ setOpen, data, setIntegration }: ModalProps) {
         <h1>{data.name}</h1>
 
         <p>{data.description}</p>
+
         <form onSubmit={data.connected ? handleDisconnect : handleSubmit}>
           {data.connected === false ? (
             <div className={styles.fields}>
@@ -111,9 +123,13 @@ export default function Modal({ setOpen, data, setIntegration }: ModalProps) {
               ))}
             </div>
           ) : null}
-          <button className={styles.connectButton} disabled={data.connected} type="submit">
-            {loading ? <div className={styles.loader} /> : "Connect"}
-          </button>
+
+          {/* Easier to read than nested ternary */}
+          {!data.connected ? (
+            <button className={styles.connectButton} disabled={data.connected} type="submit">
+              {loading ? <div className={styles.loader} /> : "Connect"}
+            </button>
+          ) : null}
           {data.connected ? (
             <button className={styles.disconnectButton} type="submit">
               {loading ? <div className={styles.loader} /> : "Disconnect"}

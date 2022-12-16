@@ -1,8 +1,7 @@
 export type Integration = {
   id: string;
   name: string;
-  url: string;
-  image: string;
+  api: string;
   description: string;
   fields: any[];
   connected: boolean;

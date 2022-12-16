@@ -16,9 +16,7 @@ const Home: NextPage = () => {
   const [open, setOpen] = useState(false);
   const [integration, setIntegration] = useState<Integration | null>(null);
 
-  const { data, error } = useSWR("/api/integrations", fetcher, {
-    // refreshInterval: 1000,
-  });
+  const { data, error } = useSWR("/api/integrations", fetcher);
 
   if (error) return <div>Failed to load</div>;
 
@@ -49,9 +47,6 @@ const Home: NextPage = () => {
 export default Home;
 
 // TODO
-// Finish POST / DELETE API
-// Update the integrations after submit
-// Check if create a hook for modal
-// Tests
-
+// Add index.ts database & user.ts pages/api
+// Refactor modal
 // HubSpot field mappings

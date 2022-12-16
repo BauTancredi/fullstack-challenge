@@ -2,10 +2,9 @@
     {
         "id": "1",
         "name": "Salesforce",
-        "url": "https://www.salesforce.com/",
-        "image": "https://cdn-www.infobip.com/wp-content/uploads/2020/10/14141818/salesforce-png.jpg",
+        "api": "https://salesforce.com/someEndpointToConnect",
         "description": "Integrate your contacts with Salesforce, the world's #1 CRM.",
-        "connected": false,
+        "connected": true,
         "fields": [
             {
                 "id": "1",
@@ -24,10 +23,9 @@
     {
         "id": "2",
         "name": "Zapier",
-        "url": "https://zapier.com/",
-        "image": "https://zapier.com/static/images/zapier-logo.png",
+        "api": "https://zapier.com/someEndpointToConnect",
         "description": "Integrate your contacts with Zapier, the world's #1 CRM.",
-        "connected": true,
+        "connected": false,
         "fields": [
             {
                 "id": "1",
@@ -40,8 +38,7 @@
     {
         "id": "3",
         "name": "HubSpot",
-        "url": "https://www.hubspot.com/",
-        "image": "https://www.hubspot.com/hubfs/HubSpot%20Logo%20White.png",
+        "api": "https://hubspot.com/someEndpointToConnect",
         "description": "Integrate your contacts with HubSpot, the world's #1 CRM.",
         "connected": false,
         "fields": [
