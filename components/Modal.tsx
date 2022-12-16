@@ -2,7 +2,7 @@ import React from "react";
 import { useSWRConfig } from "swr";
 
 import styles from "../styles/Modal.module.css";
-import { Field, Integration } from "../types";
+import { Field, Integration } from "../database";
 import { formatName } from "../utils";
 
 interface ModalProps {
@@ -49,16 +49,16 @@ export default function Modal({ setOpen, data, setIntegration }: ModalProps) {
       };
 
       const res = await fetch(`/api/integrations/${data.id}`, {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(body),
       });
 
-      mutate("/api/integrations");
-
       if (!res.ok) throw new Error("Something went wrong");
+
+      mutate("/api/integrations");
 
       setFields(data.fields);
       closeModal();
@@ -66,33 +66,6 @@ export default function Modal({ setOpen, data, setIntegration }: ModalProps) {
       throw new Error("Something went wrong");
     }
     setLoading(false);
-  };
-
-  const handleDisconnect = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    setLoading(true);
-
-    const body = {
-      name: data.name,
-      id: data.id,
-      api: data.api,
-    };
-
-    const res = await fetch(`/api/integrations/${data.id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    });
-
-    if (!res.ok) throw new Error("Something went wrong");
-
-    mutate("/api/integrations");
-
-    setFields(data.fields);
-    closeModal();
   };
 
   return (
@@ -106,7 +79,7 @@ export default function Modal({ setOpen, data, setIntegration }: ModalProps) {
 
         <p>{data.description}</p>
 
-        <form onSubmit={data.connected ? handleDisconnect : handleSubmit}>
+        <form onSubmit={handleSubmit}>
           {data.connected === false ? (
             <div className={styles.fields}>
               {data.fields.map((field: Field) => (

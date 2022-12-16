@@ -6,7 +6,7 @@ import Head from "next/head";
 
 import IntegrationsList from "../components/IntegrationsList";
 import styles from "../styles/Home.module.css";
-import { Integration } from "../types";
+import { Integration } from "../database";
 import Modal from "../components/Modal";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
@@ -47,6 +47,5 @@ const Home: NextPage = () => {
 export default Home;
 
 // TODO
-// Add index.ts database & user.ts pages/api
-// Refactor modal
+// user
 // HubSpot field mappings

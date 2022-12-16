@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Integration } from "../types";
+import { Integration } from "../database";
 import styles from "../styles/List.module.css";
 
 import IntegrationCard from "./IntegrationCard";
