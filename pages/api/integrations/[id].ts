@@ -8,7 +8,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   switch (method) {
     case "POST":
       // Here we should have all the necessary data to connect with the integration
-      // const { i id, name, api, userId, fields } = body;
+      // const { id, name, api, userId, fields } = body;
 
       Database.updateIntegration(body.id);
       res.status(200).json({ message: `Connected with ${body.name}` });

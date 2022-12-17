@@ -5,6 +5,8 @@ import styles from "../styles/Modal.module.css";
 import { Field, Integration } from "../database";
 import { fetcher, formatName } from "../utils";
 
+import CustomFields from "./CustomFields";
+
 interface ModalProps {
   data: Integration;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -13,6 +15,14 @@ interface ModalProps {
 
 export default function Modal({ setOpen, data, setIntegration }: ModalProps) {
   const [fields, setFields] = React.useState<Field[]>(data.fields);
+  const [customFields, setCustomFields] = React.useState<any>({
+    blinqFirstName: {
+      value: "",
+    },
+    blinqLastName: {
+      value: "",
+    },
+  });
   const [loading, setLoading] = React.useState(false);
   const { data: userData } = useSWR("/api/user", fetcher);
 
@@ -53,6 +63,21 @@ export default function Modal({ setOpen, data, setIntegration }: ModalProps) {
         fields: fields.map((field) => ({ name: field.name, value: field.value })),
       };
 
+      if (data.requiresCustomFields) {
+        body.fields.push({
+          name: "blinqFirstName",
+          value: customFields.blinqFirstName.value,
+        });
+        body.fields.push({
+          name: "blinqLastName",
+          value: customFields.blinqLastName.value,
+        });
+        // body.customFields = {
+        //   blinqFirstName: customFields.blinqFirstName.value,
+        //   blinqLastName: customFields.blinqLastName.value,
+        // };
+      }
+
       const res = await fetch(`/api/integrations/${data.id}`, {
         method,
         headers: {
@@ -73,6 +98,12 @@ export default function Modal({ setOpen, data, setIntegration }: ModalProps) {
     setLoading(false);
   };
 
+  const onCustomFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setCustomFields({ ...customFields, [name]: { value } });
+  };
+
   return (
     <div className={styles.modal}>
       <div className={styles.modalContent}>
@@ -85,34 +116,38 @@ export default function Modal({ setOpen, data, setIntegration }: ModalProps) {
         <p>{data.description}</p>
 
         <form onSubmit={handleSubmit}>
-          {data.connected === false ? (
-            <div className={styles.fields}>
-              {data.fields.map((field: Field) => (
-                <div key={field.name} className={styles.fieldContainer}>
-                  <label htmlFor={field.name}>{formatName(field.name)}</label>
-                  <input
-                    id={field.name}
-                    required={field.required}
-                    type={field.type}
-                    value={field.value}
-                    onChange={handleChange}
-                  />
-                </div>
-              ))}
-            </div>
-          ) : null}
-
-          {/* Easier to read than nested ternary */}
-          {!data.connected ? (
-            <button className={styles.connectButton} disabled={data.connected} type="submit">
-              {loading ? <div className={styles.loader} /> : "Connect"}
-            </button>
-          ) : null}
-          {data.connected ? (
-            <button className={styles.disconnectButton} type="submit">
-              {loading ? <div className={styles.loader} /> : "Disconnect"}
-            </button>
-          ) : null}
+          <>
+            {data.connected === false ? (
+              <div className={styles.fields}>
+                {data.fields.map((field: Field) => (
+                  <div key={field.name} className={styles.fieldContainer}>
+                    <label htmlFor={field.name}>{formatName(field.name)}</label>
+                    <input
+                      id={field.name}
+                      required={field.required}
+                      type={field.type}
+                      value={field.value}
+                      onChange={handleChange}
+                    />
+                  </div>
+                ))}
+              </div>
+            ) : null}
+            {data.requiresCustomFields && !data.connected && (
+              <CustomFields customFields={customFields} onCustomFieldChange={onCustomFieldChange} />
+            )}
+            {/* Easier to read than nested ternary */}
+            {!data.connected ? (
+              <button className={styles.connectButton} disabled={data.connected} type="submit">
+                {loading ? <div className={styles.loader} /> : "Connect"}
+              </button>
+            ) : null}
+            {data.connected ? (
+              <button className={styles.disconnectButton} type="submit">
+                {loading ? <div className={styles.loader} /> : "Disconnect"}
+              </button>
+            ) : null}
+          </>
         </form>
       </div>
     </div>

@@ -20,6 +20,7 @@ export interface Integration {
   api: string;
   description: string;
   fields: any[];
+  requiresCustomFields?: boolean;
   connected: boolean;
 }
 
@@ -75,6 +76,7 @@ export class Database {
       api: "https://hubspot.com/someEndpointToConnect",
       description: "Integrate your contacts with HubSpot, the world's #1 CRM.",
       connected: false,
+      requiresCustomFields: true,
       fields: [
         {
           id: "1",
