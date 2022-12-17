@@ -72,10 +72,6 @@ export default function Modal({ setOpen, data, setIntegration }: ModalProps) {
           name: "blinqLastName",
           value: customFields.blinqLastName.value,
         });
-        // body.customFields = {
-        //   blinqFirstName: customFields.blinqFirstName.value,
-        //   blinqLastName: customFields.blinqLastName.value,
-        // };
       }
 
       const res = await fetch(`/api/integrations/${data.id}`, {
